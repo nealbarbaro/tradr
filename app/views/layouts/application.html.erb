@@ -16,15 +16,33 @@
   	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
   	<%= stylesheet_link_tag    "application" %>
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+    <% if !notice.blank? || !alert.blank? %>
+      <div class="row">
+        <div class="large-12 columns">
+          <% if !notice.blank? %>
+            <div class="alert-box success" id="notice"><%= notice %></div>
+          <% end %>
 
-    <%= yield %>
+          <% if !alert.blank? %>
+            <div class="alert-box alert" id="alert"><%= alert %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <div calss="large-8 large-offset-3 columns">
+        <%= yield %>
+      </div>
+    </div>
 
-    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
